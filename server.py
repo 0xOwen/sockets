@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import socket
+import sys
 
 HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
 PORT = 56000        # Port to listen on (non-privileged ports are > 1023)
@@ -20,6 +21,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 break
             data = conn.recv(1024)
             if  data:
-                print('The client said:', repr(data))
+                print('\033[1;34;40m The client said: ' + repr(data.decode()) + '\033[0m', end='\n\n') 
             else:
                 break
+            
+    conn.close()
